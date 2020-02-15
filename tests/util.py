@@ -9,7 +9,17 @@ PASSWORD = "test1234"
 BAD_REQUEST = "Input payload validation failed"
 UNAUTHORIZED = "Unauthorized"
 FORBIDDEN = "You are not an administrator"
+TOKEN_EXPIRED = "Access token expired. Please log in again."
+TOKEN_BLACKLISTED = "Token blacklisted. Please log in again."
 WWW_AUTH_NO_TOKEN = 'Bearer realm="registered_users@mydomain.com"'
+WWW_AUTH_EXPIRED_TOKEN = (
+    f'{WWW_AUTH_NO_TOKEN}, error="invalid_token", error_description="{TOKEN_EXPIRED}"'
+)
+WWW_AUTH_BLACKLISTED_TOKEN = (
+    f"{WWW_AUTH_NO_TOKEN}, "
+    'error="invalid_token", '
+    f'error_description="{TOKEN_BLACKLISTED}"'
+)
 
 DEFAULT_NAME = "some-widget"
 DEFAULT_URL = "https://www.fakesite.com"
