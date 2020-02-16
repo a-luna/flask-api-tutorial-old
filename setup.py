@@ -20,13 +20,14 @@ INSTALL_REQUIRES = [
     "Flask-Bcrypt",
     "Flask-Cors",
     "Flask-Migrate",
-    "flask-restplus",
+    "flask-restx",
     "Flask-SQLAlchemy",
     "PyJWT",
     "python-dateutil",
     "python-dotenv",
     "requests",
     "urllib3",
+    "werkzeug==0.16.1",
 ]
 EXTRAS_REQUIRE = {
     "dev": [

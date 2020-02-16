@@ -85,6 +85,7 @@ widget_model = Model(
     {
         "name": String,
         "info_url": String,
+        "created_at": String(attribute="created_at_str"),
         "created_at_iso8601": DateTime(attribute="created_at"),
         "created_at_rfc822": DateTime(attribute="created_at", dt_format="rfc822"),
         "deadline": String(attribute="deadline_str"),
