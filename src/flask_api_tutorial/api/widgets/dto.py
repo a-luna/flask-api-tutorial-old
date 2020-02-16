@@ -3,10 +3,10 @@ import re
 from datetime import date, datetime, time, timezone
 
 from dateutil import parser
-from flask_restplus import Model
-from flask_restplus.fields import Boolean, DateTime, Integer, List, Nested, String, Url
-from flask_restplus.inputs import positive, URL
-from flask_restplus.reqparse import RequestParser
+from flask_restx import Model
+from flask_restx.fields import Boolean, DateTime, Integer, List, Nested, String, Url
+from flask_restx.inputs import positive, URL
+from flask_restx.reqparse import RequestParser
 
 from flask_api_tutorial.util.datetime_util import make_tzaware, DATE_MONTH_NAME
 

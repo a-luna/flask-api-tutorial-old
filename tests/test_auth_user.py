@@ -38,7 +38,6 @@ def test_auth_user_malformed_token_1(client, db):
     access_token = "Bearer mF_9.B5f-4.1JqM"
     response = get_user(client, access_token)
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == INVALID_TOKEN
     assert "WWW-Authenticate" in response.headers
     assert response.headers["WWW-Authenticate"] == WWW_AUTH_INVALID_TOKEN
@@ -53,7 +52,6 @@ def test_auth_user_malformed_token_2(client, db):
     )
     response = get_user(client, access_token)
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == INVALID_TOKEN
     assert "WWW-Authenticate" in response.headers
     assert response.headers["WWW-Authenticate"] == WWW_AUTH_INVALID_TOKEN
@@ -62,7 +60,6 @@ def test_auth_user_malformed_token_2(client, db):
 def test_auth_user_no_token(client, db):
     response = client.get(url_for("api.auth_user"))
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == "Unauthorized"
     assert "WWW-Authenticate" in response.headers
     assert response.headers["WWW-Authenticate"] == WWW_AUTH_NO_TOKEN
@@ -76,7 +73,6 @@ def test_auth_user_expired_token(client, db):
     time.sleep(6)
     response = get_user(client, access_token)
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == TOKEN_EXPIRED
     assert "WWW-Authenticate" in response.headers
     assert response.headers["WWW-Authenticate"] == WWW_AUTH_EXPIRED_TOKEN
@@ -91,7 +87,6 @@ def test_auth_user_token_blacklisted(client, db):
     assert response.status_code == HTTPStatus.OK
     response = get_user(client, access_token)
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == TOKEN_BLACKLISTED
     assert "WWW-Authenticate" in response.headers
     assert response.headers["WWW-Authenticate"] == WWW_AUTH_BLACKLISTED_TOKEN

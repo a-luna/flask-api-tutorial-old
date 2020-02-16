@@ -2,7 +2,7 @@
 from http import HTTPStatus
 
 from flask import jsonify, url_for
-from flask_restplus import abort, marshal
+from flask_restx import abort, marshal
 
 from flask_api_tutorial import db
 from flask_api_tutorial.api.auth.decorator import token_required, admin_token_required

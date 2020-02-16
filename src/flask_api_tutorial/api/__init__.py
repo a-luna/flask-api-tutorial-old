@@ -1,6 +1,6 @@
 """API blueprint configuration."""
 from flask import Blueprint
-from flask_restplus import Api
+from flask_restx import Api
 
 from flask_api_tutorial.api.auth.endpoints import auth_ns
 from flask_api_tutorial.api.widgets.endpoints import widget_ns

@@ -44,7 +44,6 @@ def test_logout_token_blacklisted(client, db):
     assert response.status_code == HTTPStatus.OK
     response = logout_user(client, access_token)
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == TOKEN_BLACKLISTED
     assert "WWW-Authenticate" in response.headers
     assert response.headers["WWW-Authenticate"] == WWW_AUTH_BLACKLISTED_TOKEN
@@ -53,7 +52,6 @@ def test_logout_token_blacklisted(client, db):
 def test_logout_no_token(client):
     response = client.post(url_for("api.auth_logout"))
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == "Unauthorized"
     assert "WWW-Authenticate" in response.headers
     assert response.headers["WWW-Authenticate"] == WWW_AUTH_NO_TOKEN
@@ -67,7 +65,6 @@ def test_logout_auth_token_expired(client, db):
     time.sleep(6)
     response = logout_user(client, access_token)
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == TOKEN_EXPIRED
     assert "WWW-Authenticate" in response.headers
     assert response.headers["WWW-Authenticate"] == WWW_AUTH_EXPIRED_TOKEN

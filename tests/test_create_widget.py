@@ -143,7 +143,6 @@ def test_create_widget_no_token(client, db):
         content_type="application/x-www-form-urlencoded",
     )
     assert response.status_code == HTTPStatus.UNAUTHORIZED
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == UNAUTHORIZED
 
 
@@ -153,7 +152,6 @@ def test_create_widget_no_admin_token(client, db, user):
     access_token = response.json["access_token"]
     response = create_widget(client, access_token)
     assert response.status_code == HTTPStatus.FORBIDDEN
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == FORBIDDEN
 
 

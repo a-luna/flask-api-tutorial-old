@@ -1,7 +1,7 @@
 """API endpoint definitions for /auth namespace."""
 from http import HTTPStatus
 
-from flask_restplus import Namespace, Resource
+from flask_restx import Namespace, Resource
 
 from flask_api_tutorial.api.auth.dto import auth_reqparser, user_model
 from flask_api_tutorial.api.auth.business import (
@@ -20,10 +20,10 @@ class RegisterUser(Resource):
     """Handles HTTP requests to URL: /api/v1/auth/register."""
 
     @auth_ns.expect(auth_reqparser)
-    @auth_ns.response(HTTPStatus.CREATED, "New user was successfully created.")
-    @auth_ns.response(HTTPStatus.CONFLICT, "Email address is already registered.")
-    @auth_ns.response(HTTPStatus.BAD_REQUEST, "Validation error.")
-    @auth_ns.response(HTTPStatus.INTERNAL_SERVER_ERROR, "Internal server error.")
+    @auth_ns.response(int(HTTPStatus.CREATED), "New user was successfully created.")
+    @auth_ns.response(int(HTTPStatus.CONFLICT), "Email address is already registered.")
+    @auth_ns.response(int(HTTPStatus.BAD_REQUEST), "Validation error.")
+    @auth_ns.response(int(HTTPStatus.INTERNAL_SERVER_ERROR), "Internal server error.")
     def post(self):
         """Register a new user."""
         request_data = auth_reqparser.parse_args()
@@ -37,10 +37,10 @@ class LoginUser(Resource):
     """Handles HTTP requests to URL: /api/v1/auth/login."""
 
     @auth_ns.expect(auth_reqparser)
-    @auth_ns.response(HTTPStatus.OK, "Login succeeded.")
-    @auth_ns.response(HTTPStatus.UNAUTHORIZED, "email or password does not match")
-    @auth_ns.response(HTTPStatus.BAD_REQUEST, "Validation error.")
-    @auth_ns.response(HTTPStatus.INTERNAL_SERVER_ERROR, "Internal server error.")
+    @auth_ns.response(int(HTTPStatus.OK), "Login succeeded.")
+    @auth_ns.response(int(HTTPStatus.UNAUTHORIZED), "email or password does not match")
+    @auth_ns.response(int(HTTPStatus.BAD_REQUEST), "Validation error.")
+    @auth_ns.response(int(HTTPStatus.INTERNAL_SERVER_ERROR), "Internal server error.")
     def post(self):
         """Authenticate user and return a session token."""
         request_data = auth_reqparser.parse_args()
@@ -54,9 +54,9 @@ class GetUser(Resource):
     """Handles HTTP requests to URL: /api/v1/auth/user."""
 
     @auth_ns.doc(security="Bearer")
-    @auth_ns.response(HTTPStatus.OK, "Token is currently valid.", user_model)
-    @auth_ns.response(HTTPStatus.BAD_REQUEST, "Validation error.")
-    @auth_ns.response(HTTPStatus.UNAUTHORIZED, "Token is invalid or expired.")
+    @auth_ns.response(int(HTTPStatus.OK), "Token is currently valid.", user_model)
+    @auth_ns.response(int(HTTPStatus.BAD_REQUEST), "Validation error.")
+    @auth_ns.response(int(HTTPStatus.UNAUTHORIZED), "Token is invalid or expired.")
     @auth_ns.marshal_with(user_model)
     def get(self):
         """Validate access token and return user info."""
@@ -68,10 +68,10 @@ class LogoutUser(Resource):
     """Handles HTTP requests to URL: /auth/logout."""
 
     @auth_ns.doc(security="Bearer")
-    @auth_ns.response(HTTPStatus.OK, "Log out succeeded, token is no longer valid.")
-    @auth_ns.response(HTTPStatus.BAD_REQUEST, "Validation error.")
-    @auth_ns.response(HTTPStatus.UNAUTHORIZED, "Token is invalid or expired.")
-    @auth_ns.response(HTTPStatus.INTERNAL_SERVER_ERROR, "Internal server error.")
+    @auth_ns.response(int(HTTPStatus.OK), "Log out succeeded, token is no longer valid.")
+    @auth_ns.response(int(HTTPStatus.BAD_REQUEST), "Validation error.")
+    @auth_ns.response(int(HTTPStatus.UNAUTHORIZED), "Token is invalid or expired.")
+    @auth_ns.response(int(HTTPStatus.INTERNAL_SERVER_ERROR), "Internal server error.")
     def post(self):
         """Add token to blacklist, deauthenticating the current user."""
         return process_logout_request()

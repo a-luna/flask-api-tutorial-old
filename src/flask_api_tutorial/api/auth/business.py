@@ -2,7 +2,7 @@
 from http import HTTPStatus
 
 from flask import current_app, jsonify
-from flask_restplus import abort
+from flask_restx import abort
 
 from flask_api_tutorial import db
 from flask_api_tutorial.api.auth.decorator import token_required

@@ -1,7 +1,7 @@
 """API endpoint definitions for /widgets namespace."""
 from http import HTTPStatus
 
-from flask_restplus import Namespace, Resource
+from flask_restx import Namespace, Resource
 
 from flask_api_tutorial.api.widgets.dto import (
     create_widget_reqparser,
@@ -28,14 +28,14 @@ widget_ns.models[pagination_model.name] = pagination_model
 
 
 @widget_ns.route("", endpoint="widget_list")
-@widget_ns.response(HTTPStatus.BAD_REQUEST, "Validation error.")
-@widget_ns.response(HTTPStatus.UNAUTHORIZED, "Unauthorized.")
-@widget_ns.response(HTTPStatus.INTERNAL_SERVER_ERROR, "Internal server error.")
+@widget_ns.response(int(HTTPStatus.BAD_REQUEST), "Validation error.")
+@widget_ns.response(int(HTTPStatus.UNAUTHORIZED), "Unauthorized.")
+@widget_ns.response(int(HTTPStatus.INTERNAL_SERVER_ERROR), "Internal server error.")
 class WidgetList(Resource):
     """Handles HTTP requests to URL: /widgets."""
 
     @widget_ns.doc(security="Bearer")
-    @widget_ns.response(HTTPStatus.OK, "Retrieved widget list.", pagination_model)
+    @widget_ns.response(int(HTTPStatus.OK), "Retrieved widget list.", pagination_model)
     @widget_ns.expect(pagination_reqparser)
     def get(self):
         """Retrieve a list of widgets."""
@@ -45,9 +45,9 @@ class WidgetList(Resource):
         return retrieve_widget_list(page, per_page)
 
     @widget_ns.doc(security="Bearer")
-    @widget_ns.response(HTTPStatus.CREATED, "Added new widget.")
-    @widget_ns.response(HTTPStatus.FORBIDDEN, "Administrator token required.")
-    @widget_ns.response(HTTPStatus.CONFLICT, "Widget name already exists.")
+    @widget_ns.response(int(HTTPStatus.CREATED), "Added new widget.")
+    @widget_ns.response(int(HTTPStatus.FORBIDDEN), "Administrator token required.")
+    @widget_ns.response(int(HTTPStatus.CONFLICT), "Widget name already exists.")
     @widget_ns.expect(create_widget_reqparser)
     def post(self):
         """Create a widget."""
@@ -57,24 +57,24 @@ class WidgetList(Resource):
 
 @widget_ns.route("/<name>", endpoint="widget")
 @widget_ns.param("name", "Widget name")
-@widget_ns.response(HTTPStatus.BAD_REQUEST, "Validation error.")
-@widget_ns.response(HTTPStatus.NOT_FOUND, "Widget not found.")
-@widget_ns.response(HTTPStatus.UNAUTHORIZED, "Unauthorized.")
-@widget_ns.response(HTTPStatus.INTERNAL_SERVER_ERROR, "Internal server error.")
+@widget_ns.response(int(HTTPStatus.BAD_REQUEST), "Validation error.")
+@widget_ns.response(int(HTTPStatus.NOT_FOUND), "Widget not found.")
+@widget_ns.response(int(HTTPStatus.UNAUTHORIZED), "Unauthorized.")
+@widget_ns.response(int(HTTPStatus.INTERNAL_SERVER_ERROR), "Internal server error.")
 class Widget(Resource):
     """Handles HTTP requests to URL: /widgets/{name}."""
 
     @widget_ns.doc(security="Bearer")
-    @widget_ns.response(HTTPStatus.OK, "Retrieved widget.", widget_model)
+    @widget_ns.response(int(HTTPStatus.OK), "Retrieved widget.", widget_model)
     @widget_ns.marshal_with(widget_model)
     def get(self, name):
         """Retrieve a widget."""
         return retrieve_widget(name)
 
     @widget_ns.doc(security="Bearer")
-    @widget_ns.response(HTTPStatus.OK, "Widget was updated.", widget_model)
-    @widget_ns.response(HTTPStatus.CREATED, "Added new widget.")
-    @widget_ns.response(HTTPStatus.FORBIDDEN, "Administrator token required.")
+    @widget_ns.response(int(HTTPStatus.OK), "Widget was updated.", widget_model)
+    @widget_ns.response(int(HTTPStatus.CREATED), "Added new widget.")
+    @widget_ns.response(int(HTTPStatus.FORBIDDEN), "Administrator token required.")
     @widget_ns.expect(update_widget_reqparser)
     def put(self, name):
         """Update a widget."""
@@ -82,8 +82,8 @@ class Widget(Resource):
         return update_widget(name, widget_dict)
 
     @widget_ns.doc(security="Bearer")
-    @widget_ns.response(HTTPStatus.NO_CONTENT, "Widget was deleted.")
-    @widget_ns.response(HTTPStatus.FORBIDDEN, "Administrator token required.")
+    @widget_ns.response(int(HTTPStatus.NO_CONTENT), "Widget was deleted.")
+    @widget_ns.response(int(HTTPStatus.FORBIDDEN), "Administrator token required.")
     def delete(self, name):
         """Delete a widget."""
         return delete_widget(name)
