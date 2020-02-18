@@ -4,7 +4,7 @@ Hello! This project is the application documented in a tutorial series on my web
 
 This can be used as boilerplate for any REST API project that is built on Flask, SQLAlchemy, Swagger UI and pytest. My goal is to provide a REST API that is secured via JSON Web Tokens (JWT) and is robust and secure enough for use in a real-world, production application. The most important packages/extensions used by the application are:
 
-- `Flask-RESTPlus`
+- `Flask-RESTx`
 - `Flask-SQLAlcheny`
 - `Flask-Migrate`
 - `PyJWT`

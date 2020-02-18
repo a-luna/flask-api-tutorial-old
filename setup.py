@@ -3,7 +3,7 @@ from pathlib import Path
 from setuptools import setup, find_packages
 
 DESCRIPTION = (
-    "Boilerplate Flask API with Flask-RESTPlus, SQLAlchemy, pytest, flake8, "
+    "Boilerplate Flask API with Flask-RESTx, SQLAlchemy, pytest, flake8, "
     "tox configured"
 )
 APP_ROOT = Path(__file__).parent
