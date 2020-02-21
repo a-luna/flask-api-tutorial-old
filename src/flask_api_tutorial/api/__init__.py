@@ -12,7 +12,7 @@ api = Api(
     api_bp,
     version="1.0",
     title="Flask API with JWT-Based Authentication",
-    description="Welcome to the Swagger UI documentation for the Widget API",
+    description="Welcome to the Swagger UI documentation page!",
     doc="/ui",
     authorizations=authorizations,
 )

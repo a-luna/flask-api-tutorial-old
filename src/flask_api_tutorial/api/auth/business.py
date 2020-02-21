@@ -5,7 +5,7 @@ from flask import current_app, jsonify
 from flask_restx import abort
 
 from flask_api_tutorial import db
-from flask_api_tutorial.api.auth.decorator import token_required
+from flask_api_tutorial.api.auth.decorators import token_required
 from flask_api_tutorial.models.token_blacklist import BlacklistedToken
 from flask_api_tutorial.models.user import User
 from flask_api_tutorial.util.datetime_util import (
