@@ -37,5 +37,4 @@ def test_delete_widget_no_admin_token(client, db, admin, user):
     access_token = response.json["access_token"]
     response = delete_widget(client, access_token, widget_name=DEFAULT_NAME)
     assert response.status_code == HTTPStatus.FORBIDDEN
-    assert "status" in response.json and response.json["status"] == "fail"
     assert "message" in response.json and response.json["message"] == FORBIDDEN

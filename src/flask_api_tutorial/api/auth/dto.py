@@ -1,8 +1,8 @@
 """Parsers and serializers for /auth API endpoints."""
-from flask_restplus import Model
-from flask_restplus.fields import String, Boolean
-from flask_restplus.inputs import email
-from flask_restplus.reqparse import RequestParser
+from flask_restx import Model
+from flask_restx.fields import String, Boolean
+from flask_restx.inputs import email
+from flask_restx.reqparse import RequestParser
 
 
 auth_reqparser = RequestParser(bundle_errors=True)

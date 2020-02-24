@@ -3,7 +3,7 @@ from pathlib import Path
 from setuptools import setup, find_packages
 
 DESCRIPTION = (
-    "Boilerplate Flask API with Flask-RESTPlus, SQLAlchemy, pytest, flake8, "
+    "Boilerplate Flask API with Flask-RESTx, SQLAlchemy, pytest, flake8, "
     "tox configured"
 )
 APP_ROOT = Path(__file__).parent
@@ -20,13 +20,14 @@ INSTALL_REQUIRES = [
     "Flask-Bcrypt",
     "Flask-Cors",
     "Flask-Migrate",
-    "flask-restplus",
+    "flask-restx",
     "Flask-SQLAlchemy",
     "PyJWT",
     "python-dateutil",
     "python-dotenv",
     "requests",
     "urllib3",
+    "werkzeug==0.16.1",
 ]
 EXTRAS_REQUIRE = {
     "dev": [
@@ -37,6 +38,7 @@ EXTRAS_REQUIRE = {
         "pytest",
         "pytest-black",
         "pytest-clarity",
+        "pytest-cov",
         "pytest-dotenv",
         "pytest-flake8",
         "pytest-flask",

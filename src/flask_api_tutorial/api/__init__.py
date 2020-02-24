@@ -1,6 +1,6 @@
 """API blueprint configuration."""
 from flask import Blueprint
-from flask_restplus import Api
+from flask_restx import Api
 
 from flask_api_tutorial.api.auth.endpoints import auth_ns
 from flask_api_tutorial.api.widgets.endpoints import widget_ns
@@ -12,7 +12,7 @@ api = Api(
     api_bp,
     version="1.0",
     title="Flask API with JWT-Based Authentication",
-    description="Welcome to the Swagger UI documentation for the Widget API",
+    description="Welcome to the Swagger UI documentation page!",
     doc="/ui",
     authorizations=authorizations,
 )
