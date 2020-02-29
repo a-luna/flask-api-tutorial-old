@@ -1,4 +1,4 @@
-"""Custom HTTPException classes that replace werkzeug's."""
+"""Custom HTTPException classes that extend werkzeug.exceptions."""
 from werkzeug.exceptions import Unauthorized, Forbidden
 
 _REALM_REGULAR_USERS = "registered_users@mydomain.com"
@@ -6,7 +6,7 @@ _REALM_ADMIN_USERS = "admin_users@mydomain.com"
 
 
 class ApiUnauthorized(Unauthorized):
-    """Customized 401 UNAUTHORIZED HTTPException with WWW-Authenticate header"""
+    """Raise status code 401 with WWW-Authenticate header"""
 
     def __init__(
         self,
